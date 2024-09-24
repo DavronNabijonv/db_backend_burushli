@@ -1,7 +1,8 @@
 const express = require('express');
 const User = require('../models/userModels');
+const { loginUser } = require('../controllers/userControllers');
 
-const router = express.Router();
+const router = express.Router(); 
 
 router.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
@@ -25,5 +26,7 @@ router.post('/register', async (req, res) => {
     }
   });
   
+
+router.post('/login',loginUser);
 
 module.exports = router;
