@@ -23,9 +23,14 @@ mongoose
 
 
 //import and use routes
+
+//User registration and login requests links
 const userRouter = require('./routes/userRoutes');
 app.use('/api/users',userRouter);
 
+//Create comiks link
+const comicGroupRouter = require('./routes/comicRoutes');
+app.use('/api/comic-groups', comicGroupRouter);
 
 // Basic route
 app.get("/", (req, res) => {
