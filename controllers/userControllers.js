@@ -1,4 +1,5 @@
 const User = require('../models/userModels');
+const bcrypt = require('bcryptjs');
 
 // Login controller
 const loginUser = async (req,res)=>{
@@ -11,8 +12,11 @@ const loginUser = async (req,res)=>{
             return res.status(400).json({message:"Foydalanuvchi topilmadi!!!"})
         }
 
+        //Colmpare the password with the hashed password in the database
+        const isMatch = await bcrypt.compare(password, user.password);
+
         // check if password matches (For now, we'll use plain text, later we can add password hashing)
-        if(user.password !== password || user.email !== email){
+        if(!isMatch || user.email !== email){
             return res.status(400).json({message:"Parol yoki foydalanuvchi email xato!!!"})
         }
 
@@ -30,4 +34,4 @@ const loginUser = async (req,res)=>{
     }
 }
 
-module.exports = {loginUser};
+module.exports = {loginUser}
